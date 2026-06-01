@@ -1,0 +1,909 @@
+/*
+  ========================================
+  ملف التصميم (CSS) لموقع تليد وجديد
+  ========================================
+  يحتوي على جميع أنماط التصميم والألوان
+  والتأثيرات البصرية للموقع
+*/
+
+/* ========================================
+   1. متغيرات الألوان والخطوط
+   ======================================== 
+   هنا نحدد الألوان الأساسية للموقع
+   بناءً على هوية المؤسسة
+*/
+
+:root {
+  /* الألوان الأساسية */
+  --primary-color: #D4A574;      /* اللون الذهبي الفاتح (من الشعار) */
+  --secondary-color: #F5E6D3;    /* اللون الكريمي (خلفية الشعار) */
+  --dark-color: #2C2C2C;         /* اللون الداكن (النصوص) */
+  --light-color: #FFFFFF;        /* اللون الأبيض */
+  --accent-color: #25D366;       /* لون الواتساب الأخضر */
+  --border-color: #E0D5C7;       /* لون الحدود الفاتح */
+  
+  /* الخطوط */
+  --font-family: 'Tajawal', sans-serif;
+  --font-size-base: 16px;
+  --font-size-large: 24px;
+  --font-size-xl: 32px;
+  --font-size-xxl: 48px;
+}
+
+/* ========================================
+   2. إعادة تعيين الأنماط الافتراضية
+   ======================================== 
+   نزيل الأنماط الافتراضية من المتصفح
+   لضمان تصميم موحد
+*/
+
+* {
+  /* إزالة الهوامش الافتراضية */
+  margin: 0;
+  padding: 0;
+  /* تضمين الحدود والحشو في حساب العرض والارتفاع */
+  box-sizing: border-box;
+}
+
+/* تعيين الخط الأساسي لكل الصفحة */
+html {
+  scroll-behavior: smooth; /* تمرير سلس عند الضغط على الروابط */
+  font-family: var(--font-family);
+}
+
+/* تعيين الخط والخلفية للجسم */
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  color: var(--dark-color);
+  background-color: var(--light-color);
+  line-height: 1.6; /* ارتفاع السطر لسهولة القراءة */
+}
+
+/* ========================================
+   3. شريط التنقل العلوي (Navbar)
+   ======================================== 
+   تصميم شريط التنقل الشفاف
+*/
+
+.navbar {
+  /* تثبيت الشريط في الأعلى */
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000; /* ضمان ظهوره فوق جميع العناصر */
+  
+  /* الخلفية شفافة قليلاً */
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px); /* تأثير الزجاج المتجمد */
+  
+  /* الظل الخفيف */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  
+  /* الحشو */
+  padding: 1rem 0;
+}
+
+/* حاوية محتوى الشريط */
+.navbar-container {
+  /* تخطيط مرن (Flexbox) */
+  display: flex;
+  justify-content: space-between; /* توزيع العناصر بالتساوي */
+  align-items: center; /* محاذاة عمودية في المنتصف */
+  
+  /* الحد الأقصى للعرض والمحاذاة */
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* شعار المؤسسة */
+.navbar-logo {
+  /* تخطيط مرن */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; /* المسافة بين الصورة والنص */
+  
+  /* النص */
+  font-size: var(--font-size-large);
+  font-weight: 700;
+  color: var(--primary-color);
+  
+  /* التأثير عند التمرير */
+  transition: transform 0.3s ease;
+}
+
+.navbar-logo:hover {
+  transform: scale(1.05); /* تكبير طفيف عند التمرير */
+}
+
+/* صورة الشعار */
+.logo-img {
+  /* الحجم */
+  width: 50px;
+  height: 50px;
+  
+  /* الزوايا المستديرة */
+  border-radius: 8px;
+  
+  /* الظل */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* نص اسم المؤسسة */
+.logo-text {
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+/* قائمة التنقل */
+.nav-menu {
+  /* إزالة النقاط من القائمة */
+  list-style: none;
+  
+  /* تخطيط مرن */
+  display: flex;
+  gap: 2rem; /* المسافة بين العناصر */
+  align-items: center;
+}
+
+/* عناصر القائمة */
+.nav-item {
+  /* لا توجد تأثيرات خاصة هنا */
+}
+
+/* روابط التنقل */
+.nav-link {
+  /* إزالة التنسيق الافتراضي للروابط */
+  text-decoration: none;
+  color: var(--dark-color);
+  
+  /* الخط */
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  
+  /* التأثير عند التمرير */
+  transition: color 0.3s ease;
+  
+  /* الحشو */
+  padding: 0.5rem 0;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--primary-color); /* تغيير اللون عند التمرير */
+  border-bottom-color: var(--primary-color); /* إضافة خط تحت النص */
+}
+
+/* شريط البحث */
+.search-bar {
+  /* تخطيط مرن */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  
+  /* الحدود والخلفية */
+  background-color: var(--secondary-color);
+  border-radius: 25px;
+  padding: 0.5rem 1rem;
+  
+  /* الحد */
+  border: 1px solid var(--border-color);
+}
+
+/* حقل البحث */
+.search-input {
+  /* إزالة الحدود الافتراضية */
+  border: none;
+  background: transparent;
+  outline: none;
+  
+  /* الخط */
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  color: var(--dark-color);
+  
+  /* العرض */
+  width: 150px;
+  padding: 0.5rem;
+}
+
+.search-input::placeholder {
+  color: #999; /* لون النص المساعد */
+}
+
+/* زر البحث */
+.search-btn {
+  /* إزالة الأنماط الافتراضية */
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  
+  /* الحجم */
+  font-size: 18px;
+  
+  /* التأثير عند التمرير */
+  transition: transform 0.3s ease;
+}
+
+.search-btn:hover {
+  transform: scale(1.2); /* تكبير الأيقونة عند التمرير */
+}
+
+/* ========================================
+   4. قسم البطل (Hero Section)
+   ======================================== 
+   التصميم الرئيسي الذي يظهر عند الدخول
+*/
+
+.hero {
+  /* الارتفاع والخلفية */
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--secondary-color) 0%, var(--light-color) 100%);
+  
+  /* التخطيط */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* الحشو */
+  padding: 2rem;
+  
+  /* المسافة من الأعلى (لتجنب الشريط العلوي) */
+  margin-top: 70px;
+}
+
+/* محتوى البطل */
+.hero-content {
+  /* التخطيط */
+  display: flex;
+  flex-direction: column; /* ترتيب عمودي */
+  align-items: center;
+  text-align: center;
+  gap: 2rem;
+  
+  /* الحد الأقصى للعرض */
+  max-width: 600px;
+  
+  /* الأنميشن */
+  animation: fadeInDown 1s ease-out;
+}
+
+/* أنميشن الظهور من الأعلى */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* صورة الشعار في البطل */
+.hero-logo {
+  /* الحجم */
+  width: 200px;
+  height: 200px;
+  
+  /* الزوايا المستديرة */
+  border-radius: 20px;
+  
+  /* الظل */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  
+  /* الأنميشن */
+  animation: bounce 2s infinite;
+}
+
+/* أنميشن الارتفاع والهبوط */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* العنوان الرئيسي */
+.hero-title {
+  /* الخط */
+  font-size: var(--font-size-xxl);
+  font-weight: 900;
+  color: var(--primary-color);
+  
+  /* الأنميشن */
+  animation: fadeInDown 1.2s ease-out;
+}
+
+/* الوصف الفرعي */
+.hero-subtitle {
+  /* الخط */
+  font-size: var(--font-size-large);
+  color: var(--dark-color);
+  
+  /* الأنميشن */
+  animation: fadeInDown 1.4s ease-out;
+}
+
+/* زر الاستكشاف */
+.cta-button {
+  /* الخلفية واللون */
+  background-color: var(--primary-color);
+  color: var(--light-color);
+  
+  /* الحدود والحشو */
+  border: none;
+  border-radius: 50px;
+  padding: 1rem 2rem;
+  
+  /* الخط */
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  font-family: var(--font-family);
+  
+  /* الرابط */
+  text-decoration: none;
+  display: inline-block;
+  
+  /* المؤشر */
+  cursor: pointer;
+  
+  /* التأثير عند التمرير */
+  transition: all 0.3s ease;
+  
+  /* الأنميشن */
+  animation: fadeInDown 1.6s ease-out;
+  
+  /* الظل */
+  box-shadow: 0 5px 15px rgba(212, 165, 116, 0.3);
+}
+
+.cta-button:hover {
+  background-color: #C89860; /* لون أغمق عند التمرير */
+  transform: translateY(-3px); /* رفع الزر قليلاً */
+  box-shadow: 0 8px 20px rgba(212, 165, 116, 0.4); /* ظل أكبر */
+}
+
+/* ========================================
+   5. قسم الأقسام (Categories Section)
+   ======================================== 
+   عرض فئات المنتجات
+*/
+
+.categories {
+  /* الخلفية والحشو */
+  background-color: var(--secondary-color);
+  padding: 4rem 2rem;
+  
+  /* المحاذاة */
+  text-align: center;
+}
+
+/* حاوية الأقسام */
+.categories-container {
+  /* التخطيط */
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  
+  /* الحد الأقصى للعرض */
+  max-width: 1200px;
+  margin: 2rem auto 0;
+}
+
+/* زر الفئة */
+.category-btn {
+  /* الخلفية واللون */
+  background-color: var(--light-color);
+  color: var(--dark-color);
+  
+  /* الحدود والحشو */
+  border: 2px solid var(--border-color);
+  border-radius: 25px;
+  padding: 0.7rem 1.5rem;
+  
+  /* الخط */
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  font-family: var(--font-family);
+  
+  /* المؤشر */
+  cursor: pointer;
+  
+  /* التأثير عند التمرير */
+  transition: all 0.3s ease;
+}
+
+.category-btn:hover {
+  /* تأثير التمرير */
+  background-color: var(--primary-color);
+  color: var(--light-color);
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+/* الزر النشط (المختار) */
+.category-btn.active {
+  /* الخلفية واللون */
+  background-color: var(--primary-color);
+  color: var(--light-color);
+  border-color: var(--primary-color);
+}
+
+/* ========================================
+   6. قسم المنتجات (Products Section)
+   ======================================== 
+   عرض بطاقات المنتجات
+*/
+
+.products {
+  /* الحشو */
+  padding: 4rem 2rem;
+  
+  /* الخلفية */
+  background-color: var(--light-color);
+}
+
+/* عنوان القسم */
+.section-title {
+  /* الخط */
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--primary-color);
+  
+  /* المحاذاة */
+  text-align: center;
+  
+  /* الحشو */
+  margin-bottom: 3rem;
+  
+  /* الزينة */
+  position: relative;
+  padding-bottom: 1rem;
+}
+
+.section-title::after {
+  /* خط زينة تحت العنوان */
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background-color: var(--primary-color);
+  border-radius: 2px;
+}
+
+/* حاوية المنتجات (شبكة) */
+.products-container {
+  /* التخطيط */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  
+  /* الحد الأقصى للعرض */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* بطاقة المنتج */
+.product-card {
+  /* الخلفية والحدود */
+  background-color: var(--light-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  
+  /* الظل */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  
+  /* التأثير عند التمرير */
+  transition: all 0.3s ease;
+  
+  /* الحشو */
+  overflow: hidden;
+}
+
+.product-card:hover {
+  /* تأثيرات التمرير */
+  transform: translateY(-8px); /* رفع البطاقة */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* ظل أكبر */
+  border-color: var(--primary-color);
+}
+
+/* صورة المنتج */
+.product-image {
+  /* الحجم */
+  width: 100%;
+  height: 250px;
+  
+  /* الخلفية */
+  background-color: var(--secondary-color);
+  
+  /* المحاذاة */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* الفائض */
+  overflow: hidden;
+}
+
+.product-image img {
+  /* الحجم */
+  width: 100%;
+  height: 100%;
+  
+  /* التأثير عند التمرير */
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image img {
+  /* تأثير التمرير على الصورة */
+  transform: scale(1.1); /* تكبير الصورة */
+}
+
+/* معلومات المنتج */
+.product-info {
+  /* الحشو */
+  padding: 1.5rem;
+  
+  /* التخطيط */
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+/* اسم المنتج */
+.product-name {
+  /* الخط */
+  font-size: var(--font-size-large);
+  font-weight: 700;
+  color: var(--dark-color);
+  
+  /* الهامش */
+  margin: 0;
+}
+
+/* وصف المنتج */
+.product-description {
+  /* الخط */
+  font-size: 14px;
+  color: #666;
+  
+  /* الهامش */
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* سعر المنتج */
+.product-price {
+  /* الخط */
+  font-size: var(--font-size-large);
+  font-weight: 700;
+  color: var(--primary-color);
+  
+  /* الهامش */
+  margin: 0.5rem 0 0 0;
+}
+
+/* زر الواتساب */
+.whatsapp-btn {
+  /* الخلفية واللون */
+  background-color: var(--accent-color);
+  color: var(--light-color);
+  
+  /* الحدود والحشو */
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  
+  /* الخط */
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  font-family: var(--font-family);
+  
+  /* الرابط */
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  
+  /* المؤشر */
+  cursor: pointer;
+  
+  /* التأثير عند التمرير */
+  transition: all 0.3s ease;
+  
+  /* الظل */
+  box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-btn:hover {
+  /* تأثير التمرير */
+  background-color: #1FAE56; /* لون أغمق */
+  transform: translateY(-2px); /* رفع الزر */
+  box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4); /* ظل أكبر */
+}
+
+/* رسالة عدم وجود نتائج */
+.no-results {
+  /* المحاذاة */
+  text-align: center;
+  padding: 3rem 2rem;
+  
+  /* الخط */
+  font-size: var(--font-size-large);
+  color: #999;
+}
+
+/* ========================================
+   7. قسم التواصل (Contact Section)
+   ======================================== 
+   معلومات التواصل
+*/
+
+.contact {
+  /* الخلفية والحشو */
+  background-color: var(--secondary-color);
+  padding: 4rem 2rem;
+  
+  /* المحاذاة */
+  text-align: center;
+}
+
+/* حاوية معلومات التواصل */
+.contact-container {
+  /* التخطيط */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  
+  /* الحد الأقصى للعرض */
+  max-width: 1000px;
+  margin: 2rem auto 0;
+}
+
+/* عنصر التواصل */
+.contact-item {
+  /* الخلفية والحدود */
+  background-color: var(--light-color);
+  border-radius: 12px;
+  padding: 2rem;
+  
+  /* الظل */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  
+  /* التأثير عند التمرير */
+  transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+  /* تأثير التمرير */
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+}
+
+.contact-item h3 {
+  /* الخط */
+  font-size: var(--font-size-large);
+  font-weight: 700;
+  color: var(--primary-color);
+  
+  /* الهامش */
+  margin-bottom: 1rem;
+}
+
+.contact-item p {
+  /* الخط */
+  font-size: var(--font-size-base);
+  color: var(--dark-color);
+  
+  /* الهامش */
+  margin: 0.5rem 0;
+}
+
+/* رابط التواصل */
+.contact-link {
+  /* اللون */
+  color: var(--primary-color);
+  
+  /* الرابط */
+  text-decoration: none;
+  
+  /* التأثير عند التمرير */
+  transition: color 0.3s ease;
+}
+
+.contact-link:hover {
+  /* تأثير التمرير */
+  color: #C89860;
+  text-decoration: underline;
+}
+
+/* ========================================
+   8. التذييل (Footer)
+   ======================================== 
+   معلومات إضافية وحقوق النشر
+*/
+
+.footer {
+  /* الخلفية واللون */
+  background-color: var(--dark-color);
+  color: var(--light-color);
+  
+  /* الحشو */
+  padding: 2rem;
+  
+  /* المحاذاة */
+  text-align: center;
+}
+
+/* محتوى التذييل */
+.footer-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-content p {
+  /* الهامش */
+  margin: 0.5rem 0;
+  
+  /* الخط */
+  font-size: 14px;
+}
+
+/* زر الإدارة */
+.admin-btn {
+  position: absolute;
+  bottom: 10px;
+  left: 20px;
+  font-size: 24px;
+  opacity: 0.4;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.admin-btn:hover {
+  opacity: 1;
+  transform: scale(1.2) rotate(90deg);
+}
+
+/* ========================================
+   9. التجاوب (Responsive Design)
+   ======================================== 
+   تعديل التصميم للأجهزة الصغيرة
+*/
+
+/* الأجهزة اللوحية والهواتف الكبيرة */
+@media (max-width: 768px) {
+  /* شريط التنقل */
+  .navbar-container {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  /* قائمة التنقل */
+  .nav-menu {
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  /* شريط البحث */
+  .search-bar {
+    width: 100%;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  /* البطل */
+  .hero {
+    margin-top: 200px;
+  }
+
+  /* العنوان الرئيسي */
+  .hero-title {
+    font-size: 32px;
+  }
+
+  /* الوصف الفرعي */
+  .hero-subtitle {
+    font-size: 18px;
+  }
+
+  /* شبكة المنتجات */
+  .products-container {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+/* الهواتف الصغيرة جداً */
+@media (max-width: 480px) {
+  /* الحشو العام */
+  body {
+    padding: 0;
+  }
+
+  /* شريط التنقل */
+  .navbar {
+    padding: 0.5rem 0;
+  }
+
+  .navbar-container {
+    padding: 0 1rem;
+  }
+
+  /* الشعار */
+  .logo-img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .logo-text {
+    font-size: 18px;
+  }
+
+  /* قائمة التنقل */
+  .nav-menu {
+    display: none; /* إخفاء القائمة في الهواتف الصغيرة */
+  }
+
+  /* البطل */
+  .hero {
+    margin-top: 150px;
+    padding: 1rem;
+  }
+
+  .hero-logo {
+    width: 150px;
+    height: 150px;
+  }
+
+  /* العنوان الرئيسي */
+  .hero-title {
+    font-size: 24px;
+  }
+
+  /* الوصف الفرعي */
+  .hero-subtitle {
+    font-size: 16px;
+  }
+
+  /* الأقسام والمنتجات */
+  .categories,
+  .contact,
+  .products {
+    padding: 2rem 1rem;
+  }
+
+  /* شبكة المنتجات */
+  .products-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  /* عنوان القسم */
+  .section-title {
+    font-size: 24px;
+    margin-bottom: 1.5rem;
+  }
+
+  /* الأزرار */
+  .category-btn {
+    padding: 0.5rem 1rem;
+    font-size: 14px;
+  }
+}

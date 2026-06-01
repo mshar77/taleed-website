@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة التحكم - مؤسسة تليد وجديد</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- Firebase مكتبات -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js"></script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary-color: #D4A574;
+      --secondary-color: #F5E6D3;
+      --dark-color: #2C2C2C;
+      --light-color: #FFFFFF;
+      --accent-color: #25D366;
+      --border-color: #E0D5C7;
+      --danger-color: #E74C3C;
+      --success-color: #27AE60;
+    }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background-color: #F9F7F4;
+      color: var(--dark-color);
+    }
+
+    .admin-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .admin-header {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      padding: 30px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .admin-header h1 {
+      color: var(--dark-color);
+      margin-bottom: 10px;
+    }
+
+    .admin-header p {
+      color: var(--dark-color);
+      opacity: 0.8;
+    }
+
+    .logout-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: var(--danger-color);
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.3s;
+      z-index: 1000;
+    }
+
+    .logout-btn:hover {
+      background-color: #C0392B;
+      transform: scale(1.05);
+    }
+
+    .tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 30px;
+      border-bottom: 2px solid var(--border-color);
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 12px 24px;
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      color: var(--dark-color);
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+
+    .tab-btn:hover {
+      color: var(--primary-color);
+    }
+
+    .tab-btn.active {
+      color: var(--primary-color);
+      border-bottom-color: var(--primary-color);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .form-section {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-section h2 {
+      color: var(--primary-color);
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--dark-color);
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid var(--border-color);
+      border-radius: 5px;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 5px rgba(212, 165, 116, 0.3);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      transition: all 0.3s;
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    .btn-primary {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: #C39A6B;
+      transform: scale(1.02);
+    }
+
+    .btn-danger {
+      background-color: var(--danger-color);
+      color: white;
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+
+    .btn-danger:hover {
+      background-color: #C0392B;
+    }
+
+    .btn-success {
+      background-color: var(--success-color);
+      color: white;
+    }
+
+    .btn-success:hover {
+      background-color: #229954;
+    }
+
+    .items-list {
+      display: grid;
+      gap: 15px;
+    }
+
+    .item-card {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 4px solid var(--primary-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s;
+    }
+
+    .item-card:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .item-info h3 {
+      color: var(--primary-color);
+      margin-bottom: 5px;
+    }
+
+    .item-info p {
+      color: #666;
+      font-size: 14px;
+      margin: 3px 0;
+    }
+
+    .item-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .alert {
+      padding: 15px 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .alert.success {
+      background-color: #D4EDDA;
+      color: #155724;
+      border: 1px solid #C3E6CB;
+      display: block;
+    }
+
+    .alert.error {
+      background-color: #F8D7DA;
+      color: #721C24;
+      border: 1px solid #F5C6CB;
+      display: block;
+    }
+
+    .empty-message {
+      text-align: center;
+      padding: 40px;
+      color: #999;
+      font-size: 16px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .item-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .item-actions {
+        width: 100%;
+        margin-top: 15px;
+      }
+
+      .logout-btn {
+        position: static;
+        margin-bottom: 20px;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <button class="logout-btn" onclick="logout()">تسجيل الخروج</button>
+
+  <div class="admin-container">
+    <div class="admin-header">
+      <h1>🔐 لوحة التحكم - مؤسسة تليد وجديد</h1>
+      <p>إدارة المنتجات والأقسام</p>
+    </div>
+
+    <div id="alertBox" class="alert"></div>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('products')">إدارة المنتجات</button>
+      <button class="tab-btn" onclick="switchTab('categories')">إدارة الأقسام</button>
+    </div>
+
+    <!-- Tab: Products -->
+    <div id="products" class="tab-content active">
+      <div class="form-section">
+        <h2>إضافة منتج جديد</h2>
+        <form id="addProductForm" onsubmit="addProduct(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="productName">اسم المنتج *</label>
+              <input type="text" id="productName" required>
+            </div>
+            <div class="form-group">
+              <label for="productPrice">السعر (ريال) *</label>
+              <input type="number" id="productPrice" required min="0">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="productCategory">القسم *</label>
+              <select id="productCategory" required>
+                <option value="">-- اختر القسم --</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="productImage">صورة المنتج</label>
+              <input type="file" id="productImage" accept="image/*">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="productDescription">الوصف</label>
+            <textarea id="productDescription"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">إضافة المنتج</button>
+        </form>
+      </div>
+
+      <div class="form-section">
+        <h2>المنتجات الموجودة</h2>
+        <div id="productsList" class="items-list">
+          <div class="empty-message">لا توجد منتجات حالياً</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Categories -->
+    <div id="categories" class="tab-content">
+      <div class="form-section">
+        <h2>إضافة قسم جديد</h2>
+        <form id="addCategoryForm" onsubmit="addCategory(event)">
+          <div class="form-group">
+            <label for="categoryName">اسم القسم *</label>
+            <input type="text" id="categoryName" required>
+          </div>
+
+          <div class="form-group">
+            <label for="categoryDescription">الوصف</label>
+            <textarea id="categoryDescription"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary">إضافة القسم</button>
+        </form>
+      </div>
+
+      <div class="form-section">
+        <h2>الأقسام الموجودة</h2>
+        <div id="categoriesList" class="items-list">
+          <div class="empty-message">لا توجد أقسام حالياً</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="firebase-config.js"></script>
+  <script>
+    const ADMIN_PASSWORD = '433311';
+    let products = [];
+    let categories = [];
+
+    // Check if logged in
+    window.addEventListener('load', function() {
+      if (!sessionStorage.getItem('adminLoggedIn')) {
+        window.location.href = 'admin-login.html';
+      }
+      loadData();
+      displayProducts();
+      displayCategories();
+      updateCategorySelect();
+    });
+
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.getElementById(tabName).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    function updateCategorySelect() {
+      const select = document.getElementById('productCategory');
+      const currentValue = select.value;
+      
+      // احتفظ بالخيار الأول
+      select.innerHTML = '<option value="">-- اختر القسم --</option>';
+      
+      // أضف الأقسام
+      categories.forEach(cat => {
+        const option = document.createElement('option');
+        option.value = cat.name;
+        option.textContent = cat.name;
+        select.appendChild(option);
+      });
+      
+      select.value = currentValue;
+    }
+
+    function addProduct(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('productName').value;
+      const price = parseInt(document.getElementById('productPrice').value);
+      const category = document.getElementById('productCategory').value;
+      const description = document.getElementById('productDescription').value;
+      const imageFile = document.getElementById('productImage').files[0];
+
+      if (!name || !price || !category) {
+        showAlert('يرجى ملء جميع الحقول المطلوبة', 'error');
+        return;
+      }
+
+      if (imageFile) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const newProduct = {
+            id: Date.now(),
+            name: name,
+            price: price,
+            category: category,
+            description: description,
+            image: e.target.result
+          };
+          products.push(newProduct);
+          saveData();
+          displayProducts();
+          document.getElementById('addProductForm').reset();
+          showAlert('✅ تم إضافة المنتج بنجاح', 'success');
+        };
+        reader.readAsDataURL(imageFile);
+      } else {
+        const newProduct = {
+          id: Date.now(),
+          name: name,
+          price: price,
+          category: category,
+          description: description,
+          image: null
+        };
+        products.push(newProduct);
+        saveData();
+        displayProducts();
+        document.getElementById('addProductForm').reset();
+        showAlert('✅ تم إضافة المنتج بنجاح', 'success');
+      }
+    }
+
+    function deleteProduct(id) {
+      if (confirm('هل أنت متأكد من حذف هذا المنتج؟')) {
+        products = products.filter(p => p.id !== id);
+        saveData();
+        displayProducts();
+        showAlert('✅ تم حذف المنتج بنجاح', 'success');
+      }
+    }
+
+    function displayProducts() {
+      const list = document.getElementById('productsList');
+      if (products.length === 0) {
+        list.innerHTML = '<div class="empty-message">لا توجد منتجات حالياً</div>';
+        return;
+      }
+
+      list.innerHTML = products.map(product => `
+        <div class="item-card">
+          <div class="item-info">
+            <h3>${product.name}</h3>
+            <p>القسم: <strong>${product.category}</strong></p>
+            <p>السعر: <strong>${product.price} ريال</strong></p>
+            <p>الوصف: ${product.description || 'بدون وصف'}</p>
+          </div>
+          <div class="item-actions">
+            <button class="btn btn-danger" onclick="deleteProduct(${product.id})">حذف</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function addCategory(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('categoryName').value;
+      const description = document.getElementById('categoryDescription').value;
+
+      if (!name) {
+        showAlert('يرجى إدخال اسم القسم', 'error');
+        return;
+      }
+
+      // تحقق من عدم تكرار القسم
+      if (categories.some(c => c.name === name)) {
+        showAlert('❌ هذا القسم موجود بالفعل', 'error');
+        return;
+      }
+
+      const newCategory = {
+        id: Date.now(),
+        name: name,
+        description: description
+      };
+
+      categories.push(newCategory);
+      saveData();
+      displayCategories();
+      updateCategorySelect();
+      document.getElementById('addCategoryForm').reset();
+      showAlert('✅ تم إضافة القسم بنجاح', 'success');
+    }
+
+    function deleteCategory(id) {
+      if (confirm('هل أنت متأكد من حذف هذا القسم؟')) {
+        const categoryName = categories.find(c => c.id === id)?.name;
+        
+        // تحقق من وجود منتجات في هذا القسم
+        if (products.some(p => p.category === categoryName)) {
+          showAlert('❌ لا يمكن حذف القسم لأن هناك منتجات فيه', 'error');
+          return;
+        }
+
+        categories = categories.filter(c => c.id !== id);
+        saveData();
+        displayCategories();
+        updateCategorySelect();
+        showAlert('✅ تم حذف القسم بنجاح', 'success');
+      }
+    }
+
+    function displayCategories() {
+      const list = document.getElementById('categoriesList');
+      if (categories.length === 0) {
+        list.innerHTML = '<div class="empty-message">لا توجد أقسام حالياً</div>';
+        return;
+      }
+
+      list.innerHTML = categories.map(category => {
+        const productCount = products.filter(p => p.category === category.name).length;
+        return `
+          <div class="item-card">
+            <div class="item-info">
+              <h3>${category.name}</h3>
+              <p>${category.description || 'بدون وصف'}</p>
+              <p>عدد المنتجات: <strong>${productCount}</strong></p>
+            </div>
+            <div class="item-actions">
+              <button class="btn btn-danger" onclick="deleteCategory(${category.id})">حذف</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function saveData() {
+      localStorage.setItem('taleedProducts', JSON.stringify(products));
+      localStorage.setItem('taleedCategories', JSON.stringify(categories));
+    }
+
+    function loadData() {
+      const savedProducts = localStorage.getItem('taleedProducts');
+      const savedCategories = localStorage.getItem('taleedCategories');
+
+      if (savedProducts) {
+        products = JSON.parse(savedProducts);
+      }
+
+      if (savedCategories) {
+        categories = JSON.parse(savedCategories);
+      }
+    }
+
+    function showAlert(message, type) {
+      const alertBox = document.getElementById('alertBox');
+      alertBox.textContent = message;
+      alertBox.className = `alert ${type}`;
+      setTimeout(() => {
+        alertBox.className = 'alert';
+      }, 3000);
+    }
+
+    function logout() {
+      sessionStorage.removeItem('adminLoggedIn');
+      window.location.href = 'admin-login.html';
+    }
+  </script>
+</body>
+</html>

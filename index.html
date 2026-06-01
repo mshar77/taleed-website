@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<!-- 
+  ========================================
+  موقع كتالوج مؤسسة تليد وجديد
+  قطع غيار السيارات
+  ========================================
+  هذا الملف يحتوي على هيكل الصفحة الرئيسية
+  مع شرح تفصيلي لكل جزء من الكود
+-->
+
+<head>
+  <!-- 
+    ========================================
+    قسم رأس الصفحة (HEAD)
+    ========================================
+    يحتوي على معلومات الصفحة والإعدادات الأساسية
+  -->
+  
+  <!-- تحديد نوع الترميز (UTF-8 للدعم الكامل للعربية) -->
+  <meta charset="UTF-8">
+  
+  <!-- إعدادات التوافق مع الأجهزة المختلفة (Responsive Design) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- عنوان الصفحة الذي يظهر في تبويب المتصفح -->
+  <title>مؤسسة تليد وجديد - قطع غيار السيارات</title>
+  
+  <!-- ربط ملف CSS الخارجي الذي يحتوي على جميع أنماط التصميم -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Firebase مكتبات -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js"></script>
+  
+  <!-- ربط خط Google Fonts للعربية (Tajawal) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+  <!-- أيقونة الصفحة (Favicon) التي تظهر في تبويب المتصفح -->
+  <link rel="icon" type="image/png" href="logo.png">
+</head>
+
+<body>
+  <!-- 
+    ========================================
+    قسم الجسم (BODY)
+    ========================================
+    يحتوي على جميع محتوى الصفحة المرئي
+  -->
+
+  <!-- ========================================
+       1. شريط التنقل العلوي (Navigation Bar)
+       ======================================== -->
+  <nav class="navbar">
+    <!-- حاوية شريط التنقل -->
+    <div class="navbar-container">
+      
+      <!-- شعار المؤسسة والاسم -->
+      <div class="navbar-logo">
+        <!-- صورة الشعار -->
+        <img src="logo.png" alt="شعار مؤسسة تليد وجديد" class="logo-img">
+        <!-- نص اسم المؤسسة -->
+        <span class="logo-text">تليد وجديد</span>
+      </div>
+
+      <!-- قائمة التنقل الرئيسية -->
+      <ul class="nav-menu">
+        <!-- رابط الصفحة الرئيسية -->
+        <li class="nav-item">
+          <a href="#home" class="nav-link">الرئيسية</a>
+        </li>
+        <!-- رابط قسم المنتجات -->
+        <li class="nav-item">
+          <a href="#products" class="nav-link">المنتجات</a>
+        </li>
+        <!-- رابط قسم الاتصال -->
+        <li class="nav-item">
+          <a href="#contact" class="nav-link">تواصل معنا</a>
+        </li>
+      </ul>
+
+      <!-- زر البحث في شريط التنقل -->
+      <div class="search-bar">
+        <!-- حقل إدخال البحث -->
+        <input 
+          type="text" 
+          id="searchInput" 
+          class="search-input" 
+          placeholder="ابحث عن منتج..."
+          autocomplete="off"
+        >
+        <!-- زر البحث -->
+        <button class="search-btn" onclick="searchProducts()">
+          🔍
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========================================
+       2. قسم البطل (Hero Section)
+       ======================================== 
+       هذا القسم يظهر عند دخول المستخدم للموقع
+       ويحتوي على الشعار والعنوان الرئيسي
+  -->
+  <section class="hero" id="home">
+    <!-- حاوية محتوى البطل -->
+    <div class="hero-content">
+      <!-- صورة الشعار الكبيرة في البطل -->
+      <img src="logo.png" alt="شعار تليد وجديد" class="hero-logo">
+      
+      <!-- العنوان الرئيسي للموقع -->
+      <h1 class="hero-title">مؤسسة تليد وجديد</h1>
+      
+      <!-- الوصف الفرعي -->
+      <p class="hero-subtitle">قطع غيار السيارات الأصلية والموثوقة</p>
+      
+      <!-- زر الانتقال إلى المنتجات -->
+      <a href="#products" class="cta-button">استكشف المنتجات</a>
+    </div>
+  </section>
+
+  <!-- ========================================
+       3. قسم الأقسام (Categories Section)
+       ======================================== 
+       يعرض فئات المنتجات المختلفة
+  -->
+  <section class="categories" id="categories">
+    <!-- عنوان القسم -->
+    <h2 class="section-title">أقسام المنتجات</h2>
+    
+    <!-- حاوية الأقسام -->
+    <div class="categories-container">
+      <!-- كل زر يمثل فئة منتجات -->
+      <button class="category-btn active" onclick="filterByCategory('all')">
+        جميع المنتجات
+      </button>
+      <button class="category-btn" onclick="filterByCategory('محركات')">
+        محركات
+      </button>
+      <button class="category-btn" onclick="filterByCategory('فرامل')">
+        فرامل
+      </button>
+      <button class="category-btn" onclick="filterByCategory('إطارات')">
+        إطارات
+      </button>
+      <button class="category-btn" onclick="filterByCategory('بطاريات')">
+        بطاريات
+      </button>
+      <button class="category-btn" onclick="filterByCategory('أخرى')">
+        أخرى
+      </button>
+    </div>
+  </section>
+
+  <!-- ========================================
+       4. قسم المنتجات (Products Section)
+       ======================================== 
+       يعرض جميع بطاقات المنتجات
+  -->
+  <section class="products" id="products">
+    <!-- عنوان القسم -->
+    <h2 class="section-title">كتالوج المنتجات</h2>
+    
+    <!-- حاوية شبكة المنتجات -->
+    <div class="products-container" id="productsContainer">
+      <!-- 
+        ========================================
+        نموذج بطاقة المنتج (Product Card)
+        ========================================
+        هذا هو الهيكل الأساسي لكل منتج
+        يمكنك نسخ هذا الكود وتعديل البيانات فقط
+        
+        خطوات التعديل:
+        1. غير صورة المنتج (src="...")
+        2. غير اسم المنتج (Product Name)
+        3. غير الوصف (Product Description)
+        4. غير السعر (Price)
+        5. غير الفئة (data-category="...")
+        6. احتفظ برابط الواتساب كما هو (سيتم ملؤه تلقائياً)
+      -->
+      
+      <!-- بطاقة منتج 1: مرشح الهواء -->
+      <div class="product-card" data-category="محركات" data-name="مرشح الهواء الأصلي">
+        <!-- صورة المنتج -->
+        <div class="product-image">
+          <img src="https://via.placeholder.com/300x300?text=مرشح+الهواء" alt="مرشح الهواء الأصلي">
+        </div>
+        
+        <!-- معلومات المنتج -->
+        <div class="product-info">
+          <!-- اسم المنتج -->
+          <h3 class="product-name">مرشح الهواء الأصلي</h3>
+          
+          <!-- وصف المنتج -->
+          <p class="product-description">مرشح هواء عالي الجودة يضمن أداء محرك أفضل وتوفير الوقود</p>
+          
+          <!-- السعر -->
+          <p class="product-price">150 ريال</p>
+          
+          <!-- الفئة (مخفية ولكن تُستخدم للبحث والتصفية) -->
+          <span class="product-category" style="display:none;">محركات</span>
+          
+          <!-- زر الاستفسار عبر واتساب -->
+          <a href="https://wa.me/966536655941?text=مرحباً، أرغب في الاستفسار عن منتج: مرشح الهواء الأصلي" 
+             target="_blank" 
+             class="whatsapp-btn">
+            💬 استفسر عبر واتساب
+          </a>
+        </div>
+      </div>
+
+      <!-- بطاقة منتج 2: وسادات الفرامل -->
+      <div class="product-card" data-category="فرامل" data-name="وسادات الفرامل الأصلية">
+        <div class="product-image">
+          <img src="https://via.placeholder.com/300x300?text=وسادات+الفرامل" alt="وسادات الفرامل الأصلية">
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">وسادات الفرامل الأصلية</h3>
+          <p class="product-description">وسادات فرامل متطورة توفر توقف آمن وسلس في جميع الظروف</p>
+          <p class="product-price">280 ريال</p>
+          <span class="product-category" style="display:none;">فرامل</span>
+          <a href="https://wa.me/966536655941?text=مرحباً، أرغب في الاستفسار عن منتج: وسادات الفرامل الأصلية" 
+             target="_blank" 
+             class="whatsapp-btn">
+            💬 استفسر عبر واتساب
+          </a>
+        </div>
+      </div>
+
+      <!-- بطاقة منتج 3: بطارية السيارة -->
+      <div class="product-card" data-category="بطاريات" data-name="بطارية السيارة 12V">
+        <div class="product-image">
+          <img src="https://via.placeholder.com/300x300?text=بطارية" alt="بطارية السيارة 12V">
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">بطارية السيارة 12V</h3>
+          <p class="product-description">بطارية قوية وموثوقة تضمن تشغيل السيارة في جميع الأوقات</p>
+          <p class="product-price">450 ريال</p>
+          <span class="product-category" style="display:none;">بطاريات</span>
+          <a href="https://wa.me/966536655941?text=مرحباً، أرغب في الاستفسار عن منتج: بطارية السيارة 12V" 
+             target="_blank" 
+             class="whatsapp-btn">
+            💬 استفسر عبر واتساب
+          </a>
+        </div>
+      </div>
+
+      <!-- بطاقة منتج 4: إطار السيارة -->
+      <div class="product-card" data-category="إطارات" data-name="إطار السيارة 185/65R15">
+        <div class="product-image">
+          <img src="https://via.placeholder.com/300x300?text=إطار" alt="إطار السيارة 185/65R15">
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">إطار السيارة 185/65R15</h3>
+          <p class="product-description">إطار عالي الجودة يوفر راحة قيادة وأمان على الطرق</p>
+          <p class="product-price">320 ريال</p>
+          <span class="product-category" style="display:none;">إطارات</span>
+          <a href="https://wa.me/966536655941?text=مرحباً، أرغب في الاستفسار عن منتج: إطار السيارة 185/65R15" 
+             target="_blank" 
+             class="whatsapp-btn">
+            💬 استفسر عبر واتساب
+          </a>
+        </div>
+      </div>
+
+      <!-- بطاقة منتج 5: زيت المحرك -->
+      <div class="product-card" data-category="محركات" data-name="زيت المحرك الأصلي 5W30">
+        <div class="product-image">
+          <img src="https://via.placeholder.com/300x300?text=زيت+المحرك" alt="زيت المحرك الأصلي 5W30">
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">زيت المحرك الأصلي 5W30</h3>
+          <p class="product-description">زيت محرك عالي الأداء يحافظ على صحة المحرك ويطيل عمره</p>
+          <p class="product-price">85 ريال</p>
+          <span class="product-category" style="display:none;">محركات</span>
+          <a href="https://wa.me/966536655941?text=مرحباً، أرغب في الاستفسار عن منتج: زيت المحرك الأصلي 5W30" 
+             target="_blank" 
+             class="whatsapp-btn">
+            💬 استفسر عبر واتساب
+          </a>
+        </div>
+      </div>
+
+      <!-- بطاقة منتج 6: شمعات الإشعال -->
+      <div class="product-card" data-category="محركات" data-name="شمعات الإشعال الأصلية">
+        <div class="product-image">
+          <img src="https://via.placeholder.com/300x300?text=شمعات" alt="شمعات الإشعال الأصلية">
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">شمعات الإشعال الأصلية</h3>
+          <p class="product-description">شمعات إشعال موثوقة توفر أداء محرك أفضل واستهلاك وقود أقل</p>
+          <p class="product-price">120 ريال</p>
+          <span class="product-category" style="display:none;">محركات</span>
+          <a href="https://wa.me/966536655941?text=مرحباً، أرغب في الاستفسار عن منتج: شمعات الإشعال الأصلية" 
+             target="_blank" 
+             class="whatsapp-btn">
+            💬 استفسر عبر واتساب
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- رسالة تظهر عندما لا توجد نتائج بحث -->
+    <div id="noResults" class="no-results" style="display:none;">
+      <p>لم يتم العثور على منتجات مطابقة للبحث</p>
+    </div>
+  </section>
+
+  <!-- ========================================
+       5. قسم التواصل (Contact Section)
+       ======================================== 
+       يحتوي على معلومات التواصل
+  -->
+  <section class="contact" id="contact">
+    <!-- عنوان القسم -->
+    <h2 class="section-title">تواصل معنا</h2>
+    
+    <!-- حاوية معلومات التواصل -->
+    <div class="contact-container">
+      <!-- معلومة التواصل: رقم الواتساب -->
+      <div class="contact-item">
+        <h3>واتساب</h3>
+        <p>
+          <a href="https://wa.me/966536655941" target="_blank" class="contact-link">
+            +966 53 665 5941
+          </a>
+        </p>
+      </div>
+      
+      <!-- معلومة التواصل: البريد الإلكتروني -->
+      <div class="contact-item">
+        <h3>البريد الإلكتروني</h3>
+        <p>
+          <a href="mailto:info@taleed.com" class="contact-link">
+            info@taleed.com
+          </a>
+        </p>
+      </div>
+      
+      <!-- معلومة التواصل: ساعات العمل -->
+      <div class="contact-item">
+        <h3>ساعات العمل</h3>
+        <p>السبت - الخميس: 8:00 صباحاً - 6:00 مساءً</p>
+        <p>الجمعة: مغلق</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       6. التذييل (Footer)
+       ======================================== 
+       يحتوي على معلومات إضافية وحقوق النشر
+  -->
+  <footer class="footer">
+    <!-- محتوى التذييل -->
+    <div class="footer-content">
+      <!-- نص حقوق النشر -->
+      <p>&copy; 2024 مؤسسة تليد وجديد. جميع الحقوق محفوظة.</p>
+      <!-- نص إضافي -->
+      <p>متخصصون في قطع غيار السيارات الأصلية والموثوقة</p>
+      <!-- زر الإدارة -->
+      <a href="admin-login.html" class="admin-btn" title="لوحة التحكم">⚙️</a>
+    </div>
+  </footer>
+
+  <!-- ========================================
+       7. ربط ملف JavaScript
+       ======================================== 
+       يحتوي على جميع الوظائف التفاعلية
+  -->
+  <script src="firebase-config.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>

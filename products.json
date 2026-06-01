@@ -1,0 +1,37 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "مرشح الهواء الأصلي",
+      "category": "محركات",
+      "price": 150,
+      "description": "مرشح هواء عالي الجودة يضمن أداء محرك أفضل وتوفير الوقود",
+      "images": [
+        "https://via.placeholder.com/300x300?text=مرشح+الهواء+1",
+        "https://via.placeholder.com/300x300?text=مرشح+الهواء+2"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "وسادات الفرامل الأصلية",
+      "category": "فرامل",
+      "price": 280,
+      "description": "وسادات فرامل متطورة توفر توقف آمن وسلس في جميع الظروف",
+      "images": [
+        "https://via.placeholder.com/300x300?text=وسادات+الفرامل+1",
+        "https://via.placeholder.com/300x300?text=وسادات+الفرامل+2"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "بطارية السيارة 12V",
+      "category": "بطاريات",
+      "price": 450,
+      "description": "بطارية قوية وموثوقة تضمن تشغيل السيارة في جميع الأوقات",
+      "images": [
+        "https://via.placeholder.com/300x300?text=بطارية+1",
+        "https://via.placeholder.com/300x300?text=بطارية+2"
+      ]
+    }
+  ]
+}
