@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<!-- 
+  ========================================
+  موقع كتالوج مؤسسة تليد وجديد
+  قطع غيار السيارات
+  ========================================
+  هذا الملف يحتوي على هيكل الصفحة الرئيسية
+  مع شرح تفصيلي لكل جزء من الكود
+-->
+
+<head>
+  <!-- 
+    ========================================
+    قسم رأس الصفحة (HEAD)
+    ========================================
+    يحتوي على معلومات الصفحة والإعدادات الأساسية
+  -->
+  
+  <!-- تحديد نوع الترميز (UTF-8 للدعم الكامل للعربية) -->
+  <meta charset="UTF-8">
+  
+  <!-- إعدادات التوافق مع الأجهزة المختلفة (Responsive Design) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- عنوان الصفحة الذي يظهر في تبويب المتصفح -->
+  <title>مؤسسة تليد وجديد - قطع غيار السيارات</title>
+  
+  <!-- ربط ملف CSS الخارجي الذي يحتوي على جميع أنماط التصميم -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Firebase مكتبات -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js"></script>
+  
+  <!-- ربط خط Google Fonts للعربية (Tajawal) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- 
+    ========================================
+    1. قسم الرأس (HEADER)
+    ========================================
+    يحتوي على شعار الموقع والقائمة الرئيسية
+  -->
+  <header class="header">
+    <div class="header-content">
+      <!-- شعار الموقع -->
+      <div class="logo">
+        <h1>🚛 مؤسسة تليد وجديد</h1>
+        <p>متخصصون في قطع غيار السيارات الأصلية</p>
+      </div>
+
+      <!-- رقم الاتصال -->
+      <div class="contact-info">
+        <a href="tel:+966536655941" class="phone-link">
+          📞 +966 53 665 5941
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 
+    ========================================
+    2. قسم البطل (HERO)
+    ========================================
+    قسم مرحب يحتوي على رسالة ترحيبية
+  -->
+  <section class="hero">
+    <div class="hero-content">
+      <h2>مرحباً بك في مؤسسة تليد وجديد</h2>
+      <p>نوفر لك أفضل قطع الغيار الأصلية بأسعار منافسة</p>
+      <a href="#products" class="cta-button">استكشف المنتجات</a>
+    </div>
+  </section>
+
+  <!-- 
+    ========================================
+    3. قسم البحث والتصفية
+    ========================================
+    يحتوي على حقل البحث وأزرار الفئات
+  -->
+  <section class="search-section">
+    <div class="container">
+      <!-- حقل البحث -->
+      <div class="search-container">
+        <input 
+          type="text" 
+          id="searchInput" 
+          class="search-input" 
+          placeholder="ابحث عن منتج..."
+          onkeyup="searchProducts()"
+        >
+        <button class="search-button" onclick="searchProducts()">🔍 بحث</button>
+      </div>
+
+      <!-- أزرار الفئات -->
+      <div class="categories-container">
+        <button class="category-btn active" onclick="filterByCategory('all')">جميع المنتجات</button>
+        <!-- سيتم إضافة الفئات الأخرى ديناميكياً من JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- 
+    ========================================
+    4. قسم المنتجات
+    ========================================
+    يحتوي على بطاقات المنتجات
+  -->
+  <section class="products-section" id="products">
+    <div class="container">
+      <h2 class="section-title">منتجاتنا</h2>
+      
+      <!-- حاوية المنتجات -->
+      <div class="products-container" id="productsContainer">
+        <div class="loading-message">جاري تحميل المنتجات...</div>
+      </div>
+
+      <!-- رسالة عدم وجود نتائج -->
+      <div class="no-results" id="noResults" style="display: none;">
+        <p>لم نجد منتجات مطابقة لبحثك</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 
+    ========================================
+    5. قسم التذييل (FOOTER)
+    ========================================
+    يحتوي على معلومات الاتصال والروابط
+  -->
+  <footer class="footer">
+    <div class="footer-content">
+      <!-- معلومات الاتصال -->
+      <div class="footer-section">
+        <h3>اتصل بنا</h3>
+        <p>📞 +966 53 665 5941</p>
+        <p>📧 info@taleed.com</p>
+      </div>
+
+      <!-- الروابط السريعة -->
+      <div class="footer-section">
+        <h3>روابط سريعة</h3>
+        <ul>
+          <li><a href="#products">المنتجات</a></li>
+          <li><a href="#about">عن الموقع</a></li>
+          <li><a href="#contact">اتصل بنا</a></li>
+        </ul>
+      </div>
+
+      <!-- حقوق النشر -->
+      <div class="footer-section">
+        <p>&copy; 2024 مؤسسة تليد وجديد. جميع الحقوق محفوظة.</p>
+      </div>
+
+      <!-- زر الإدارة -->
+      <a href="admin-login.html" class="admin-btn" title="لوحة التحكم">⚙️</a>
+    </div>
+  </footer>
+
+  <!-- ========================================
+       6. ربط ملفات JavaScript
+       ======================================== 
+       يحتوي على جميع الوظائف التفاعلية
+  -->
+  <script src="firebase-integration.js"></script>
+  <script src="script-firebase.js"></script>
+</body>
+
+</html>
