@@ -17,8 +17,8 @@ const firebaseConfig = {
   messagingSenderId: "896657184485",
   appId: "1:896657184485:web:0142f0d7d2d97019cf660c",
   measurementId: "G-7Z365NEF66",
-  databaseURL: "https://taleed-website-default-rtdb.firebaseio.com"
-};
+  databaseURL: "https://taleed-website-default-rtdb.asia-southeast1.firebasedatabase.app"
+}
 
 // ========================================
 // تهيئة Firebase
