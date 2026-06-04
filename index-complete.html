@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مؤسسة تليد وجديد - قطع غيار الشاحنات</title>
+  
+  <!-- Google Site Verification -->
+  <meta name="google-site-verification" content="google2243fd55a7fd0d03" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+  
+  <link rel="icon" type="image/png" href="logo.png">
+
+  <style>
+    /*
+      ========================================
+      ملف التصميم (CSS) لموقع تليد وجديد
+      ========================================
+    */
+
+    /* ========================================
+       1. متغيرات الألوان والخطوط
+       ======================================== */
+    :root {
+      --primary-color: #D4A574;      /* اللون الذهبي الفاتح (من الشعار) */
+      --secondary-color: #F5E6D3;    /* اللون الكريمي (خلفية الشعار) */
+      --dark-color: #2C2C2C;         /* اللون الداكن (النصوص) */
+      --light-color: #FFFFFF;        /* اللون الأبيض */
+      --accent-color: #25D366;       /* لون الواتساب الأخضر */
+      --border-color: #E0D5C7;       /* لون الحدود الفاتح */
+      
+      --font-family: 'Tajawal', sans-serif;
+      --font-size-base: 16px;
+      --font-size-large: 24px;
+      --font-size-xl: 32px;
+      --font-size-xxl: 48px;
+    }
+
+    /* ========================================
+       2. إعادة تعيين الأنماط الافتراضية
+       ======================================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: var(--font-family);
+    }
+
+    body {
+      font-family: var(--font-family);
+      font-size: var(--font-size-base);
+      color: var(--dark-color);
+      background-color: var(--light-color);
+      line-height: 1.6;
+    }
+
+    /* ========================================
+       3. شريط التنقل العلوي (Navbar)
+       ======================================== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 1rem 0;
+    }
+
+    .navbar-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .navbar-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: var(--font-size-large);
+      font-weight: 700;
+      color: var(--primary-color);
+      transition: transform 0.3s ease;
+    }
+
+    .navbar-logo:hover {
+      transform: scale(1.05);
+    }
+
+    .logo-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo-text {
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--dark-color);
+      font-size: var(--font-size-base);
+      font-weight: 500;
+      padding: 0.5rem 0;
+      border-bottom: 2px solid transparent;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--primary-color);
+      border-bottom-color: var(--primary-color);
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: var(--secondary-color);
+      border-radius: 25px;
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .search-input {
+      border: none;
+      background: transparent;
+      outline: none;
+      font-family: var(--font-family);
+      font-size: var(--font-size-base);
+      color: var(--dark-color);
+      width: 150px;
+      padding: 0.5rem;
+    }
+
+    .search-input::placeholder {
+      color: #999;
+    }
+
+    .search-btn {
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-size: 18px;
+      transition: transform 0.3s ease;
+    }
+
+    .search-btn:hover {
+      transform: scale(1.2);
+    }
+
+    /* ========================================
+       4. قسم البطل (Hero Section)
+       ======================================== */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--secondary-color) 0%, var(--light-color) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      margin-top: 70px;
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 2rem;
+      max-width: 600px;
+      animation: fadeInDown 1s ease-out;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-logo {
+      width: 200px;
+      height: 200px;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    .hero-title {
+      font-size: var(--font-size-xxl);
+      font-weight: 900;
+      color: var(--primary-color);
+      animation: fadeInDown 1.2s ease-out;
+    }
+
+    .hero-subtitle {
+      font-size: var(--font-size-large);
+      color: var(--dark-color);
+      animation: fadeInDown 1.4s ease-out;
+    }
+
+    .cta-button {
+      background-color: var(--primary-color);
+      color: var(--light-color);
+      border: none;
+      border-radius: 50px;
+      padding: 1rem 2rem;
+      font-size: var(--font-size-base);
+      font-weight: 600;
+      font-family: var(--font-family);
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      animation: fadeInDown 1.6s ease-out;
+      box-shadow: 0 5px 15px rgba(212, 165, 116, 0.3);
+    }
+
+    .cta-button:hover {
+      background-color: #C89860;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(212, 165, 116, 0.4);
+    }
+
+    /* الأزرار تحت الشعار */
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .hero-button {
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      font-family: var(--font-family);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    .whatsapp-hero-btn {
+      background: #25D366;
+      color: white;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    }
+
+    .whatsapp-hero-btn:hover {
+      background: #1FAE56;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(37, 211, 102, 0.4);
+    }
+
+    .ai-hero-btn {
+      background: linear-gradient(135deg, #FFD700 0%, #FFC700 100%);
+      color: #333;
+      box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+    }
+
+    .ai-hero-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(255, 215, 0, 0.4);
+    }
+
+    /* ========================================
+       5. قسم الأقسام (Categories Section)
+       ======================================== */
+    .categories {
+      background-color: var(--secondary-color);
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .categories-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      max-width: 1200px;
+      margin: 2rem auto 0;
+    }
+
+    .category-btn {
+      background-color: var(--light-color);
+      color: var(--dark-color);
+      border: 2px solid var(--border-color);
+      border-radius: 25px;
+      padding: 0.7rem 1.5rem;
+      font-size: var(--font-size-base);
+      font-weight: 500;
+      font-family: var(--font-family);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .category-btn:hover {
+      background-color: var(--primary-color);
+      color: var(--light-color);
+      border-color: var(--primary-color);
+      transform: translateY(-2px);
+    }
+
+    .category-btn.active {
+      background-color: var(--primary-color);
+      color: var(--light-color);
+      border-color: var(--primary-color);
+    }
+
+    /* ========================================
+       6. قسم المنتجات (Products Section)
+       ======================================== */
+    .products {
+      padding: 4rem 2rem;
+      background-color: var(--light-color);
+    }
+
+    .section-title {
+      font-size: var(--font-size-xl);
+      font-weight: 700;
+      color: var(--primary-color);
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+      padding-bottom: 1rem;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background-color: var(--primary-color);
+      border-radius: 2px;
+    }
+
+    .products-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .product-card {
+      background-color: var(--light-color);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      border-color: var(--primary-color);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 250px;
+      background-color: var(--secondary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.1);
+    }
+
+    .product-info {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .product-name {
+      font-size: var(--font-size-large);
+      font-weight: 700;
+      color: var(--dark-color);
+      margin: 0;
+    }
+
+    .product-description {
+      font-size: 14px;
+      color: #666;
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .product-price {
+      font-size: var(--font-size-large);
+      font-weight: 700;
+      color: var(--primary-color);
+      margin: 0.5rem 0 0 0;
+    }
+
+    .whatsapp-btn {
+      background-color: var(--accent-color);
+      color: var(--light-color);
+      border: none;
+      border-radius: 8px;
+      padding: 0.8rem 1rem;
+      font-size: var(--font-size-base);
+      font-weight: 600;
+      font-family: var(--font-family);
+      text-decoration: none;
+      display: block;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
+    }
+
+    .whatsapp-btn:hover {
+      background-color: #1FAE56;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(37, 211, 102, 0.4);
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 3rem 2rem;
+      font-size: var(--font-size-large);
+      color: #999;
+    }
+
+    /* ========================================
+       7. قسم التواصل (Contact Section)
+       ======================================== */
+    .contact {
+      background-color: var(--secondary-color);
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .contact-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 2rem auto 0;
+    }
+
+    .contact-item {
+      background-color: var(--light-color);
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+    }
+
+    .contact-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .contact-item h3 {
+      font-size: var(--font-size-large);
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+
+    .contact-item p {
+      font-size: var(--font-size-base);
+      color: var(--dark-color);
+      margin: 0.5rem 0;
+    }
+
+    .contact-link {
+      color: var(--primary-color);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .contact-link:hover {
+      color: #C89860;
+      text-decoration: underline;
+    }
+
+    /* ========================================
+       8. التذييل (Footer)
+       ======================================== */
+    .footer {
+      background-color: var(--dark-color);
+      color: var(--light-color);
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .footer-content p {
+      margin: 0.5rem 0;
+      font-size: 14px;
+    }
+
+    /* ========================================
+       9. أنماط الـ Chatbot
+       ======================================== */
+    
+    .chat-widget-container {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 999;
+      font-family: 'Tajawal', sans-serif;
+    }
+    
+    .chat-toggle-btn {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #FFD700 0%, #FFC700 100%);
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      transition: all 0.3s ease;
+      animation: pulse 2s infinite;
+    }
+    
+    .chat-toggle-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(255, 215, 0, 0.6);
+    }
+    
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4);
+      }
+      50% {
+        box-shadow: 0 4px 20px rgba(255, 215, 0, 0.8);
+      }
+    }
+    
+    .chat-window {
+      position: fixed;
+      bottom: 90px;
+      left: 20px;
+      width: 380px;
+      height: 600px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 5px 40px rgba(0, 0, 0, 0.16);
+      display: none;
+      flex-direction: column;
+      opacity: 0;
+      transform: translateY(20px) scale(0.95);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+    
+    .chat-window.open {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    
+    .chat-header {
+      background: linear-gradient(135deg, #D4A574 0%, #C89860 100%);
+      color: white;
+      padding: 1rem;
+      border-radius: 12px 12px 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .chat-header-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin: 0;
+    }
+    
+    .chat-header-subtitle {
+      font-size: 12px;
+      opacity: 0.9;
+      margin: 0;
+    }
+    
+    .chat-close-btn {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    
+    .chat-close-btn:hover {
+      transform: rotate(90deg);
+    }
+    
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      background: #f5f5f5;
+    }
+    
+    .chat-message {
+      display: flex;
+      animation: slideIn 0.3s ease;
+    }
+    
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .user-message {
+      justify-content: flex-end;
+    }
+    
+    .ai-message {
+      justify-content: flex-start;
+    }
+    
+    .message-text {
+      background: white;
+      padding: 0.8rem 1rem;
+      border-radius: 12px;
+      max-width: 80%;
+      word-wrap: break-word;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+    
+    .user-message .message-text {
+      background: #D4A574;
+      color: white;
+      border-radius: 12px 0 12px 12px;
+    }
+    
+    .ai-message .message-text {
+      background: white;
+      color: #333;
+      border-radius: 0 12px 12px 12px;
+      border: 1px solid #e0e0e0;
+    }
+    
+    .message-image {
+      max-width: 150px;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+    }
+    
+    .loading {
+      justify-content: flex-start;
+    }
+    
+    .typing-indicator {
+      display: flex;
+      gap: 4px;
+      padding: 0.8rem 1rem;
+      background: white;
+      border-radius: 12px;
+      border: 1px solid #e0e0e0;
+    }
+    
+    .typing-indicator span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #D4A574;
+      animation: typing 1.4s infinite;
+    }
+    
+    .typing-indicator span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    
+    .typing-indicator span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+    
+    @keyframes typing {
+      0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.5;
+      }
+      30% {
+        transform: translateY(-10px);
+        opacity: 1;
+      }
+    }
+    
+    .chat-input-area {
+      padding: 1rem;
+      border-top: 1px solid #e0e0e0;
+      display: flex;
+      gap: 0.5rem;
+      flex-direction: column;
+    }
+    
+    .chat-input-row {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    #chatInput {
+      flex: 1;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 0.7rem;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 14px;
+      resize: none;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+    
+    #chatInput:focus {
+      border-color: #D4A574;
+    }
+    
+    .chat-send-btn {
+      background: linear-gradient(135deg, #D4A574 0%, #C89860 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0.7rem 1rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      font-family: 'Tajawal', sans-serif;
+    }
+    
+    .chat-send-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(212, 165, 116, 0.3);
+    }
+    
+    .chat-image-input-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #f5f5f5;
+      padding: 0.5rem 0.8rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 12px;
+      color: #666;
+      transition: all 0.2s ease;
+    }
+    
+    .chat-image-input-label:hover {
+      background: #e8e8e8;
+    }
+    
+    #chatImageInput {
+      display: none;
+    }
+
+    /* ========================================
+       10. التجاوب (Responsive Design)
+       ======================================== */
+    @media (max-width: 768px) {
+      .navbar-container {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .nav-menu {
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+      }
+
+      .search-bar {
+        width: 100%;
+      }
+
+      .search-input {
+        width: 100%;
+      }
+
+      .hero {
+        margin-top: 200px;
+      }
+
+      .hero-title {
+        font-size: 32px;
+      }
+
+      .hero-subtitle {
+        font-size: 18px;
+      }
+
+      .products-container {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .hero-button {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .chat-window {
+        width: calc(100% - 40px);
+        height: 500px;
+        bottom: 80px;
+        left: 20px;
+        right: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 0;
+      }
+
+      .navbar {
+        padding: 0.5rem 0;
+      }
+
+      .navbar-container {
+        padding: 0 1rem;
+      }
+
+      .logo-img {
+        width: 40px;
+        height: 40px;
+      }
+
+      .logo-text {
+        font-size: 18px;
+      }
+
+      .nav-menu {
+        display: none;
+      }
+
+      .hero {
+        margin-top: 150px;
+        padding: 1rem;
+      }
+
+      .hero-logo {
+        width: 150px;
+        height: 150px;
+      }
+
+      .hero-title {
+        font-size: 24px;
+      }
+
+      .hero-subtitle {
+        font-size: 16px;
+      }
+
+      .categories,
+      .contact,
+      .products {
+        padding: 2rem 1rem;
+      }
+
+      .products-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .section-title {
+        font-size: 24px;
+        margin-bottom: 1.5rem;
+      }
+
+      .category-btn {
+        padding: 0.5rem 1rem;
+        font-size: 14px;
+      }
+
+      .chat-window {
+        width: calc(100% - 40px);
+        height: 500px;
+        bottom: 80px;
+        left: 20px;
+        right: 20px;
+      }
+
+      .message-text {
+        max-width: 90%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Google Site Verification (Hidden) -->
+  <div style="display:none;">
+    <meta name="google-site-verification" content="google2243fd55a7fd0d03" />
+  </div>
+
+  <nav class="navbar">
+    <div class="navbar-container">
+      
+      <div class="navbar-logo">
+        <img src="logo.png" alt="شعار مؤسسة تليد وجديد" class="logo-img">
+        <span class="logo-text">تليد وجديد</span>
+      </div>
+
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="#home" class="nav-link">الرئيسية</a>
+        </li>
+        <li class="nav-item">
+          <a href="#products" class="nav-link">المنتجات</a>
+        </li>
+        <li class="nav-item">
+          <a href="#contact" class="nav-link">تواصل معنا</a>
+        </li>
+      </ul>
+
+      <div class="search-bar">
+        <input 
+          type="text" 
+          id="searchInput" 
+          class="search-input" 
+          placeholder="ابحث عن منتج..."
+          autocomplete="off"
+        >
+        <button class="search-btn" onclick="searchProducts()">
+          🔍
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <img src="logo.png" alt="شعار تليد وجديد" class="hero-logo">
+      <h1 class="hero-title">مؤسسة تليد وجديد</h1>
+      <p class="hero-subtitle">قطع غيار الشاحنات الأصلية والموثوقة</p>
+      <a href="#products" class="cta-button">استكشف المنتجات</a>
+      
+      <!-- الأزرار تحت الشعار -->
+      <div class="hero-buttons">
+        <a href="https://wa.me/966536655941" target="_blank" class="hero-button whatsapp-hero-btn">
+          📞 تواصل عبر واتساب
+        </a>
+        <button class="hero-button ai-hero-btn" onclick="toggleChatbot()">
+          🤖 تحدث مع ذكاء تليد وجديد
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="categories" id="categories">
+    <h2 class="section-title">أقسام المنتجات</h2>
+    <div class="categories-container">
+      <button class="category-btn active" onclick="filterByCategory('all')">
+        جميع المنتجات
+      </button>
+      <button class="category-btn" onclick="filterByCategory('محركات')">
+        محركات
+      </button>
+      <button class="category-btn" onclick="filterByCategory('فرامل')">
+        فرامل
+      </button>
+      <button class="category-btn" onclick="filterByCategory('إطارات')">
+        إطارات
+      </button>
+      <button class="category-btn" onclick="filterByCategory('بطاريات')">
+        بطاريات
+      </button>
+      <button class="category-btn" onclick="filterByCategory('أخرى')">
+        أخرى
+      </button>
+    </div>
+  </section>
+
+  <section class="products" id="products">
+    <h2 class="section-title">كتالوج المنتجات</h2>
+    <div class="products-container" id="productsContainer">
+      
+      <div class="product-card" data-category="محركات" data-name="مرشح الهواء الأصلي">
+        <div class="product-image">
+          <img src="https://via.placeholder.com/300x300?text=مرشح+الهواء" alt="مرشح الهواء الأصلي">
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">مرشح الهواء الأصلي</h3>
+          <p class="product-description">مرشح هواء عالي الجودة يضمن أداء محرك أفضل وتوفير الوقود</p>
+          <p class="product-price">150 ريال</p>
+          <span class="product-category" style="display:none;">محركات</span>
+          <a href="https://wa.me/966536655941?text=مرحباً، أرغب في الاستفسار عن منتج: مرشح الهواء الأصلي" 
+             target="_blank" 
+             class="whatsapp-btn">
+            💬 استفسر عبر واتساب
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="فرامل" data-name="وسادات الفرامل الأصلية">
+        <div class="product-image">
+          <img src="https://via.placeholder.com/300x300?text=وسادات+الفرامل" alt="وسادات الفرامل الأصلية">
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">وسادات الفرامل الأصلية</h3>
+          <p class="product-description">وسادات فرامل متطورة توفر توقف آمن وسلس في جميع الظروف</p>
+          <p class="product-price">280 ريال</p>
+          <span class="product-category" style="display:none;">فرامل</span>
+          <a href="https://wa.me/966536655941?text=مرحباً، أرغب في الاستفسار عن منتج: وسادات الفرامل الأصلية" 
+             target="_blank" 
+             class="whatsapp-btn">
+            💬 استفسر عبر واتساب
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="بطاريات" data-name="بطارية السيارة 12V">
+        <div class="product-image">
+          <img src="https://via.placeholder.com/300x300?text=بطارية" alt="بطارية السيارة 12V">
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">بطارية السيارة 12V</h3>
+          <p class="product-description">بطارية قوية وموثوقة تضمن تشغيل السيارة في جميع الأوقات</p>
+          <p class="product-price">450 ريال</p>
+          <span class="product-category" style="display:none;">بطاريات</span>
+          <a href="https://wa.me/966536655941?text=مرحباً، أرغب في الاستفسار عن منتج: بطارية السيارة 12V" 
+             target="_blank" 
+             class="whatsapp-btn">
+            💬 استفسر عبر واتساب
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="إطارات" data-name="إطار السيارة 185/65R15">
+        <div class="product-image">
+          <img src="https://via.placeholder.com/300x300?text=إطار" alt="إطار السيارة 185/65R15">
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">إطار السيارة 185/65R15</h3>
+          <p class="product-description">إطار عالي الجودة يوفر راحة قيادة وأمان على الطرق</p>
+          <p class="product-price">320 ريال</p>
+          <span class="product-category" style="display:none;">إطارات</span>
+          <a href="https://wa.me/966536655941?text=مرحباً، أرغب في الاستفسار عن منتج: إطار السيارة 185/65R15" 
+             target="_blank" 
+             class="whatsapp-btn">
+            💬 استفسر عبر واتساب
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="محركات" data-name="زيت المحرك الأصلي 5W30">
+        <div class="product-image">
+          <img src="https://via.placeholder.com/300x300?text=زيت+المحرك" alt="زيت المحرك الأصلي 5W30">
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">زيت المحرك الأصلي 5W30</h3>
+          <p class="product-description">زيت محرك عالي الأداء يحافظ على صحة المحرك ويطيل عمره</p>
+          <p class="product-price">85 ريال</p>
+          <span class="product-category" style="display:none;">محركات</span>
+          <a href="https://wa.me/966536655941?text=مرحباً، أرغب في الاستفسار عن منتج: زيت المحرك الأصلي 5W30" 
+             target="_blank" 
+             class="whatsapp-btn">
+            💬 استفسر عبر واتساب
+          </a>
+        </div>
+      </div>
+
+      <div class="product-card" data-category="محركات" data-name="شمعات الإشعال الأصلية">
+        <div class="product-image">
+          <img src="https://via.placeholder.com/300x300?text=شمعات" alt="شمعات الإشعال الأصلية">
+        </div>
+        <div class="product-info">
+          <h3 class="product-name">شمعات الإشعال الأصلية</h3>
+          <p class="product-description">شمعات إشعال موثوقة توفر أداء محرك أفضل واستهلاك وقود أقل</p>
+          <p class="product-price">120 ريال</p>
+          <span class="product-category" style="display:none;">محركات</span>
+          <a href="https://wa.me/966536655941?text=مرحباً، أرغب في الاستفسار عن منتج: شمعات الإشعال الأصلية" 
+             target="_blank" 
+             class="whatsapp-btn">
+            💬 استفسر عبر واتساب
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="noResults" class="no-results" style="display:none;">
+      <p>لم يتم العثور على منتجات مطابقة للبحث</p>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <h2 class="section-title">تواصل معنا</h2>
+    <div class="contact-container">
+      <div class="contact-item">
+        <h3>واتساب</h3>
+        <p>
+          <a href="https://wa.me/966536655941" target="_blank" class="contact-link">
+            +966 53 665 5941
+          </a>
+        </p>
+      </div>
+      
+      <div class="contact-item">
+        <h3>البريد الإلكتروني</h3>
+        <p>
+          <a href="mailto:info@taleed.com" class="contact-link">
+            info@taleed.com
+          </a>
+        </p>
+      </div>
+      
+      <div class="contact-item">
+        <h3>ساعات العمل</h3>
+        <p>السبت - الخميس: 8:00 صباحاً - 6:00 مساءً</p>
+        <p>الجمعة: مغلق</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <p>&copy; 2024 مؤسسة تليد وجديد. جميع الحقوق محفوظة.</p>
+      <p>متخصصون في قطع غيار الشاحنات الأصلية والموثوقة</p>
+    </div>
+  </footer>
+
+  <!-- ذكاء تليد وجديد - Chatbot Widget -->
+  <div class="chat-widget-container">
+    <button class="chat-toggle-btn" onclick="toggleChatbot()" title="ذكاء تليد وجديد">
+      💬
+    </button>
+    
+    <div class="chat-window" id="chatWindow">
+      <div class="chat-header">
+        <div>
+          <p class="chat-header-title">🤖 ذكاء تليد وجديد</p>
+          <p class="chat-header-subtitle">مساعد ذكي لقطع الشاحنات</p>
+        </div>
+        <button class="chat-close-btn" onclick="closeChatbot()">✕</button>
+      </div>
+      
+      <div class="chat-messages" id="chatMessages">
+        <div class="chat-message ai-message">
+          <div class="message-text">
+            👋 مرحباً! أنا ذكاء تليد وجديد، مساعدك الذكي في اختيار قطع الشاحنات المناسبة.
+            <br><br>
+            كيف يمكنني مساعدتك؟ أخبرني عن المشكلة التي تواجهها أو القطعة التي تبحث عنها.
+          </div>
+        </div>
+      </div>
+      
+      <div class="chat-input-area">
+        <div class="chat-input-row">
+          <input 
+            type="text" 
+            id="chatInput" 
+            placeholder="اكتب رسالتك هنا..."
+            onkeypress="if(event.key==='Enter' && !event.shiftKey) { event.preventDefault(); sendChatMessage(); }"
+          >
+          <button class="chat-send-btn" onclick="sendChatMessage()">إرسال</button>
+        </div>
+        <label class="chat-image-input-label">
+          📷 رفع صورة
+          <input type="file" id="chatImageInput" accept="image/*">
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // ========================================
+    // وظائف البحث والتصفية
+    // ========================================
+
+    let currentCategory = 'all';
+    let currentSearchTerm = '';
+
+    function searchProducts() {
+      const searchInput = document.getElementById('searchInput');
+      currentSearchTerm = searchInput.value.toLowerCase();
+      filterProducts();
+    }
+
+    function filterByCategory(category) {
+      currentCategory = category;
+      const buttons = document.querySelectorAll('.category-btn');
+      
+      buttons.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.textContent.trim() === category || 
+            (category === 'all' && btn.textContent.includes('جميع'))) {
+          btn.classList.add('active');
+        }
+      });
+      
+      filterProducts();
+    }
+
+    function filterProducts() {
+      const products = document.querySelectorAll('.product-card');
+      let visibleCount = 0;
+      
+      products.forEach(product => {
+        const productCategory = product.getAttribute('data-category');
+        const productName = product.getAttribute('data-name').toLowerCase();
+        
+        const categoryMatch = currentCategory === 'all' || productCategory === currentCategory;
+        const searchMatch = productName.includes(currentSearchTerm);
+        
+        if (categoryMatch && searchMatch) {
+          product.style.display = 'block';
+          visibleCount++;
+        } else {
+          product.style.display = 'none';
+        }
+      });
+      
+      const noResults = document.getElementById('noResults');
+      if (visibleCount === 0) {
+        noResults.style.display = 'block';
+      } else {
+        noResults.style.display = 'none';
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchInput = document.getElementById('searchInput');
+      
+      if (searchInput) {
+        searchInput.addEventListener('keypress', function(event) {
+          if (event.key === 'Enter') {
+            searchProducts();
+          }
+        });
+        
+        searchInput.addEventListener('input', function() {
+          searchProducts();
+        });
+      }
+
+      const links = document.querySelectorAll('a[href^="#"]');
+      links.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+    });
+
+    // ========================================
+    // وظائف الـ Chatbot
+    // ========================================
+
+    const GEMINI_API_KEY = 'AQ.Ab8RN6LcMYTxJrtJA6kgHO5cXCBjnCU4umSZQD7OlxQWA2R58g';
+    const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
+
+    let chatHistory = [];
+    let allProducts = [];
+
+    function loadProductsForAI() {
+      const productCards = document.querySelectorAll('.product-card');
+      allProducts = [];
+      
+      productCards.forEach(card => {
+        const name = card.querySelector('.product-name')?.textContent || '';
+        const price = card.querySelector('.product-price')?.textContent || '';
+        const description = card.querySelector('.product-description')?.textContent || '';
+        const category = card.getAttribute('data-category') || '';
+        
+        allProducts.push({
+          name: name,
+          price: price,
+          description: description,
+          category: category
+        });
+      });
+      
+      console.log('✅ Products loaded for AI:', allProducts);
+    }
+
+    function getSystemMessage() {
+      const productsText = allProducts.map(p => 
+        `- ${p.name} (${p.category}): ${p.price} - ${p.description}`
+      ).join('\n');
+      
+      return `أنت ذكاء تليد وجديد - موظف خدمة عملاء ذكي في مؤسسة تليد وجديد لقطع غيار الشاحنات.
+
+مهامك:
+1. الرد على استفسارات العملاء عن قطع الشاحنات
+2. فهم المشاكل التقنية وتقديم الحلول
+3. اقتراح القطع المناسبة من قائمتنا
+4. إذا كانت القطعة موجودة، أذكر اسمها والسعر والوصف
+5. يمكنك اقتراح عدة قطع إذا لزم الأمر
+6. كن احترافياً وودياً في الرد
+
+قائمة القطع المتوفرة:
+${productsText}
+
+ملاحظات مهمة:
+- إذا لم تجد قطعة مناسبة، قل للعميل أننا سنبحث عنها
+- استخدم اللغة العربية دائماً
+- كن مختصراً وواضحاً
+- إذا ذكر العميل قطعة معينة، ابحث عنها في القائمة`;
+    }
+
+    async function sendToGemini(userMessage) {
+      try {
+        const messages = [
+          ...chatHistory,
+          { role: 'user', content: userMessage }
+        ];
+        
+        const response = await fetch(GEMINI_API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-goog-api-key': GEMINI_API_KEY
+          },
+          body: JSON.stringify({
+            contents: messages.map(msg => ({
+              role: msg.role === 'user' ? 'user' : 'model',
+              parts: [{ text: msg.content }]
+            })),
+            systemInstruction: {
+              parts: [{ text: getSystemMessage() }]
+            },
+            generationConfig: {
+              temperature: 0.7,
+              topK: 40,
+              topP: 0.95,
+              maxOutputTokens: 1024,
+            }
+          })
+        });
+        
+        if (!response.ok) {
+          const error = await response.json();
+          console.error('❌ Gemini API Error:', error);
+          return 'عذراً، حدث خطأ في الاتصال. يرجى المحاولة لاحقاً.';
+        }
+        
+        const data = await response.json();
+        const aiMessage = data.candidates[0]?.content?.parts[0]?.text || 'عذراً، لم أستطع الرد.';
+        
+        chatHistory.push({ role: 'user', content: userMessage });
+        chatHistory.push({ role: 'model', content: aiMessage });
+        
+        if (chatHistory.length > 20) {
+          chatHistory = chatHistory.slice(-20);
+        }
+        
+        return aiMessage;
+      } catch (error) {
+        console.error('❌ Error:', error);
+        return 'عذراً، حدث خطأ. يرجى المحاولة لاحقاً.';
+      }
+    }
+
+    function createMessageElement(text, isUser, imageUrl = null) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `chat-message ${isUser ? 'user-message' : 'ai-message'}`;
+      
+      let content = `<div class="message-text">${escapeHtml(text)}</div>`;
+      
+      if (imageUrl) {
+        content = `<img src="${imageUrl}" class="message-image" alt="صورة"><div class="message-text">${escapeHtml(text)}</div>`;
+      }
+      
+      messageDiv.innerHTML = content;
+      return messageDiv;
+    }
+
+    function escapeHtml(text) {
+      const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      };
+      return text.replace(/[&<>"']/g, m => map[m]);
+    }
+
+    async function sendChatMessage() {
+      const input = document.getElementById('chatInput');
+      const fileInput = document.getElementById('chatImageInput');
+      const chatBox = document.getElementById('chatMessages');
+      
+      if (!input.value.trim() && !fileInput.files.length) {
+        return;
+      }
+      
+      const userMessage = input.value.trim();
+      const file = fileInput.files[0];
+      
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          chatBox.appendChild(createMessageElement(userMessage, true, e.target.result));
+          chatBox.scrollTop = chatBox.scrollHeight;
+        };
+        reader.readAsDataURL(file);
+      } else {
+        chatBox.appendChild(createMessageElement(userMessage, true));
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+      
+      input.value = '';
+      fileInput.value = '';
+      
+      const loadingDiv = document.createElement('div');
+      loadingDiv.className = 'chat-message ai-message loading';
+      loadingDiv.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+      chatBox.appendChild(loadingDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+      
+      const aiResponse = await sendToGemini(userMessage);
+      
+      loadingDiv.remove();
+      
+      chatBox.appendChild(createMessageElement(aiResponse, false));
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function toggleChatbot() {
+      const chatWindow = document.getElementById('chatWindow');
+      chatWindow.classList.toggle('open');
+      
+      if (chatWindow.classList.contains('open')) {
+        document.getElementById('chatInput').focus();
+      }
+    }
+
+    function closeChatbot() {
+      document.getElementById('chatWindow').classList.remove('open');
+    }
+
+    // تحميل المنتجات عند فتح الصفحة
+    window.addEventListener('load', function() {
+      loadProductsForAI();
+    });
+  </script>
+</body>
+</html>
